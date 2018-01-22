@@ -1,6 +1,8 @@
 package com.auto;
 
+import com.auto.task.BaseTask;
 import com.auto.task.NewsTask;
+import com.auto.task.TaoNewsTask;
 
 /**
  * 包: com.auto
@@ -12,16 +14,15 @@ public class Main
 {
     public static void main(String[] args)
     {
-        NewsTask task=null;
+        BaseTask task=null;
         try
         {
-            task = new NewsTask();
+            task = new TaoNewsTask();
             task.excute();
         }catch (Exception e){
             try
             {
                 Thread.sleep(10000);
-                task.close();
             }
             catch (InterruptedException e1)
             {

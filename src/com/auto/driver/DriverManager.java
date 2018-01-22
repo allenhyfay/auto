@@ -4,6 +4,7 @@ package com.auto.driver;
 import com.auto.bo.AndroidDriverStatus;
 import com.auto.bo.ChromeOption;
 import com.auto.shell.CommonService;
+import com.auto.task.BaseTask;
 import io.appium.java_client.android.AndroidDriver;
 
 import java.util.ArrayList;
@@ -18,27 +19,14 @@ import java.util.List;
 public class DriverManager
 {
     public  static List<AndroidDriverStatus> driverList = new ArrayList<AndroidDriverStatus>(); //可用设备
-    private static DriverManager instance = null;
-    private String devicesName="HKR4C15817004771";
     private  String adbPoint="adb";
     private String appiumPoint = "appium";
 
-    //静态工厂方法
-    public static DriverManager getInstance() {
-        if (instance == null) {
-            instance = new DriverManager();
-        }
-        return instance;
-    }
+    private BaseTask baseTask;
 
-    public  void close(){
-        if(instance!=null)
-        {
-            instance = null;
-        }
-    }
-
-    private DriverManager() {
+    public DriverManager(BaseTask baseTask)
+    {
+        this.baseTask = baseTask;
         initDriver();
     }
 
@@ -46,7 +34,7 @@ public class DriverManager
         int port = 4723;
         int bp = 4721;
         //调用远程mcss接口获取设备
-        List<String> devicesNameList = getAndroidDevices();
+        List<String> devicesNameList = baseTask.getAndroidDevices();
         //executeShell(adbPoint+" start-server");
 
         //启动同等设备数量的appium-server
@@ -62,9 +50,9 @@ public class DriverManager
         }
 
         ChromeOption chromeOption = new ChromeOption();
-        chromeOption.setAndroidPackage("com.martian.hbnews");
-        chromeOption.setAndroidActivity(".activity.MartianAppStart");//启动页
-        getEnableSettingDriverManager("com.martian.hbnews", ".activity.MartianAppStart", chromeOption);
+        chromeOption.setAndroidPackage(baseTask.getPackage());
+        chromeOption.setAndroidActivity(baseTask.getActivity());//启动页
+        getEnableSettingDriverManager(baseTask.getPackage(),baseTask.getActivity(), chromeOption);
 
     }
 
@@ -75,21 +63,11 @@ public class DriverManager
      */
     public AndroidDriverStatus getEnableDriver() {
         for (AndroidDriverStatus androidDriverStatus : driverList) {
-            //if (androidDriverStatus.getStatus().equalsIgnoreCase("0")) {
-               // androidDriverStatus.setStatus("1");
                 return androidDriverStatus;
-           // }
         }
         return null;
     }
 
-
-
-    private List<String> getAndroidDevices() {
-        List<String> devicesNameList = new ArrayList<>();
-        devicesNameList.add(devicesName);
-        return devicesNameList;
-    }
 
     /**
      * 简单描述：创建setting driver

@@ -2,8 +2,13 @@ package com.auto.task;
 
 import com.auto.bo.AndroidDriverStatus;
 import com.auto.driver.DriverManager;
+import com.auto.shell.script.BaseScript;
 import com.auto.shell.script.NewsScript;
 import com.gargoylesoftware.htmlunit.WebConsole;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 包: com.allen.task
@@ -11,7 +16,7 @@ import com.gargoylesoftware.htmlunit.WebConsole;
  *
  * @author Allen  Copyright 2016 成都创行, Inc. All rights reserved.2018年01月15日
  */
-public class NewsTask
+public class NewsTask extends BaseTask
 {
     private DriverManager driverManager;
 
@@ -19,12 +24,12 @@ public class NewsTask
 
     public void excute() throws Exception{
 
-        driverManager = DriverManager.getInstance();
+        driverManager =new  DriverManager(this);
         androidDriverStatus = driverManager.getEnableDriver();
         if (androidDriverStatus == null) {
             return;
         }
-        NewsScript newsScript = new NewsScript(androidDriverStatus.getAndroidDriver());
+        BaseScript newsScript = new NewsScript(androidDriverStatus.getAndroidDriver());
 
         try {
 
@@ -38,9 +43,22 @@ public class NewsTask
         }
     }
 
-    public void close() {
-        driverManager.close();
+
+    @Override
+    public String getPackage()
+    {
+        return "com.martian.hbnews";
     }
 
+    @Override
+    public String getActivity()
+    {
+        return ".activity.MartianAppStart";
+    }
 
+    @Override
+    public List<String> getAndroidDevices()
+    {
+        return Arrays.asList(new String[]{"HKR4C15817004771"});
+    }
 }

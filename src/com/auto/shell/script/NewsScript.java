@@ -13,11 +13,8 @@ import java.util.List;
  *
  * @author Allen  Copyright 2016 成都创行, Inc. All rights reserved.2018年01月15日
  */
-public class NewsScript
+public class NewsScript extends BaseScript
 {
-
-    private AndroidDriver driver;
-
 
     public NewsScript(AndroidDriver driver)
     {
@@ -42,7 +39,7 @@ public class NewsScript
                 if (ggout.isDisplayed() && ggout.getText().indexOf("广告") > -1)
                 {
                     System.out.println("========= 广告");
-                    rollUp();
+                    rollUp(600,400);
                     continue;
                 }
                 else
@@ -52,7 +49,7 @@ public class NewsScript
                     element2.click();
                     rollPageInCurrent();
                     Thread.currentThread().sleep(500);
-                    rollUp();
+                    rollUp(600,400);
                 }
             }
         }catch (Exception e){
@@ -62,18 +59,12 @@ public class NewsScript
         }
     }
 
-    /**
-     * 向上滚动
-     */
-    private void rollUp(){
-        driver.swipe(100, 600, 100, 400, 1000);
-    }
 
     /**
      * 内容滑动并退出
      * @throws InterruptedException
      */
-    private void rollPageInCurrent() throws InterruptedException
+    protected void rollPageInCurrent() throws InterruptedException
     {
         long startTime=System.currentTimeMillis();
         boolean isOpen=false;
@@ -83,7 +74,7 @@ public class NewsScript
         int rollcount=0;
         while (true){
 
-            Thread.currentThread().sleep(4000);
+            Thread.currentThread().sleep(2000);
            /* rollcount++;
             try
             {
@@ -102,7 +93,7 @@ public class NewsScript
             }catch (Exception e){e.printStackTrace();}*/
             driver.swipe(100,600,100,200,1000);
             long endTime=System.currentTimeMillis();
-            if(endTime-startTime > 100000)
+            if(endTime-startTime > 30000)
                 break;
         }
         driver.findElementByClassName("android.widget.ImageButton").click();
