@@ -24,11 +24,11 @@ public class NewsTask
         if (androidDriverStatus == null) {
             return;
         }
-        NewsScript newsScript = new NewsScript(androidDriverStatus);
+        NewsScript newsScript = new NewsScript(androidDriverStatus.getAndroidDriver());
 
         try {
 
-            Thread.currentThread().sleep(10000);
+            Thread.currentThread().sleep(15000);
 
             newsScript.operateProcess();
         } catch (Exception e) {
