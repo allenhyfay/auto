@@ -28,17 +28,26 @@ public class TaoNewsScript extends BaseScript
                 WebElement webElement = driver.findElementById(
                         "com.coohua.xinwenzhuan:id/home_news_list");
 
+                if(!webElement.isDisplayed()){
+                    System.out.println("===== 跳过");
+                    rollUp(600, 400);
+                    continue;
+                }
+
                 WebElement currentElement = webElement.findElements(
                         By.id("com.coohua.xinwenzhuan:id/tab_feed__item_img_multi"))
                         .get(0);
+                if(!webElement.isDisplayed()){
+                    System.out.println("===== 跳过2");
+                    rollUp(600, 400);
+                    continue;
+                }
 
                 currentElement.click();
 
                 rollPageInCurrent();
 
-                int height = currentElement.getSize().getHeight();
-                int rollHeight = (600 - height) > 0 ? 600 - height : 400;
-                rollUp(600, rollHeight);
+                rollUp(600, 100);
                 Thread.currentThread().sleep(6000);
             }catch (Exception e){
                 rollUp(600, 400);
@@ -51,25 +60,39 @@ public class TaoNewsScript extends BaseScript
     {
         long startTime=System.currentTimeMillis();
         int count=0;
+        boolean isAll=false;
         while (true&&count<100){
             try{
-                Thread.sleep(4000);
-                rollUp(600,400);
+                rollUp(800,250);
 
-                WebElement element= driver.findElementById("com.coohua.xinwenzhuan:id/news_detail_extra");
-                if(element.isDisplayed()){
-                    System.out.println("=====查看全文");
-                    element.click();
+                if(!isAll&&count>3)
+                {
+                    System.out.println("=============");
+                    WebElement element = driver.findElementById(
+                            "com.coohua.xinwenzhuan:id/news_detail_look_more");
+                    if (element.isDisplayed())
+                    {
+                        System.out.println("=====查看全文");
+                        element.click();
+                        isAll=true;
+                    }
                 }
-                WebElement likeElement=driver.findElementById("com.coohua.xinwenzhuan:id/news_detail_prefer");
-                if(likeElement.isDisplayed()){
-                    rollUp(600, 400);
-                    break;
+                if(isAll&&count>3)
+                {
+                    WebElement likeElement = driver.findElementById(
+                            "com.coohua.xinwenzhuan:id/news_detail_prefer");
+                    if (likeElement.isDisplayed())
+                    {
+                        System.out.println("=====结束");
+                        rollUp(600, 100);
+                        Thread.sleep(2000);
+                        break;
+                    }
                 }
                 count++;
             }catch (Exception e){}
         }
-
+        rollUp(600, 100);
         driver.findElementById("com.coohua.xinwenzhuan:id/xlxl_actionbar_up").click();
 
     }
