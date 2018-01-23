@@ -2,6 +2,7 @@ package com.auto.web.task;
 
 import com.auto.task.BaseTask;
 import com.auto.task.NewsTask;
+import com.auto.task.TaoNewsTask;
 import com.auto.web.service.UniqueReadService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class TaskManager
 {
 
-    @Scheduled(cron = "0 14 14 * * *")
+    //@Scheduled(cron = "0 17 14 * * *")
     public void runNewsTask(){
         BaseTask task=null;
         try
@@ -37,8 +38,24 @@ public class TaskManager
         }
 
     }
-    @Scheduled(cron = "0 14 14 * * *")
-    public void runTaoNewsTask(){
 
+    @Scheduled(cron = "0 20 14 * * *")
+    public void runTaoNewsTask(){
+        BaseTask task=null;
+        try
+        {
+            task = new TaoNewsTask();
+            task.excute();
+        }catch (Exception e){
+            try
+            {
+                Thread.sleep(10000);
+            }
+            catch (InterruptedException e1)
+            {
+                e1.printStackTrace();
+            }
+            runNewsTask();
+        }
     }
 }

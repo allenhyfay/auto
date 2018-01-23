@@ -70,7 +70,10 @@ public class TaoNewsScript extends BaseScript
         boolean isAll=false;
         while (true&&count<100){
             try{
-                rollUp(800,250);
+                if(count>0)
+                {
+                    rollUp(800, 250);
+                }
 
                 if(!isAll&&count>3)
                 {
