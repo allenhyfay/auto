@@ -17,7 +17,7 @@ public class Main
         BaseTask task=null;
         try
         {
-            task = new TaoNewsTask();
+            task = new NewsTask();
             task.excute();
         }catch (Exception e){
             try
