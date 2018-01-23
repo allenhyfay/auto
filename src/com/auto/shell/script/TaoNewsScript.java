@@ -46,7 +46,7 @@ public class TaoNewsScript extends BaseScript
                 }
 
                 String title=currentElement.findElement(By.id("com.coohua.xinwenzhuan:id/tab_feed__item_img_multi_title")).getText();
-                if(!isEmpty(title))
+                if(isEmpty(title))
                 {
                     add(title);
                     currentElement.click();

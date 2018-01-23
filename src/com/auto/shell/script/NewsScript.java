@@ -50,14 +50,15 @@ public class NewsScript extends BaseScript
                             By.id("com.martian.hbnews:id/news_summary_title_tv"));
 
                     String title=element2.getText();
-                    if(!isEmpty(title))
+                    System.out.println(title +"  是否抓过:"+(!isEmpty(title)));
+                    if(isEmpty(title))
                     {
                         add(title);
                         element2.click();
                         rollPageInCurrent();
                         Thread.currentThread().sleep(500);
-                        rollUp(600, 400);
                     }
+                    rollUp(600, 400);
                 }
             }
         }catch (Exception e){

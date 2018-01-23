@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class TaskManager
 {
 
-    @Scheduled(cron = "0 10 14 * * *")
+    @Scheduled(cron = "0 14 14 * * *")
     public void runNewsTask(){
         BaseTask task=null;
         try
