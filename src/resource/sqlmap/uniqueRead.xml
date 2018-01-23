@@ -11,7 +11,8 @@
     </insert>
 
     <select id="getUniqueBo"
-            parameterType="java.lang.String">
+            parameterType="java.lang.String"
+            resultType="com.auto.web.bo.UniqueReadBo">
         SELECT * from uniqueBo WHERE uuid=#{uuid}
     </select>
 

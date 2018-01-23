@@ -29,7 +29,8 @@ public class NewsTask extends BaseTask
         if (androidDriverStatus == null) {
             return;
         }
-        BaseScript newsScript = new NewsScript(androidDriverStatus.getAndroidDriver());
+        BaseScript newsScript = new NewsScript(androidDriverStatus.getAndroidDriver()
+                ,androidDriverStatus.getDeviceName());
 
         try {
 

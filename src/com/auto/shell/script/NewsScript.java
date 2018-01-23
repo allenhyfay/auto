@@ -16,9 +16,11 @@ import java.util.List;
 public class NewsScript extends BaseScript
 {
 
-    public NewsScript(AndroidDriver driver)
+    public NewsScript(AndroidDriver driver,String devices)
     {
+        super();
         this.driver=driver;
+        this.devices=devices;
     }
 
 
@@ -46,10 +48,16 @@ public class NewsScript extends BaseScript
                 {
                     WebElement element2 = layoutElement.findElement(
                             By.id("com.martian.hbnews:id/news_summary_title_tv"));
-                    element2.click();
-                    rollPageInCurrent();
-                    Thread.currentThread().sleep(500);
-                    rollUp(600,400);
+
+                    String title=element2.getText();
+                    if(!isEmpty(title))
+                    {
+                        add(title);
+                        element2.click();
+                        rollPageInCurrent();
+                        Thread.currentThread().sleep(500);
+                        rollUp(600, 400);
+                    }
                 }
             }
         }catch (Exception e){
@@ -99,5 +107,9 @@ public class NewsScript extends BaseScript
         driver.findElementByClassName("android.widget.ImageButton").click();
     }
 
-
+    @Override
+    public String getCurrenTitle()
+    {
+        return null;
+    }
 }

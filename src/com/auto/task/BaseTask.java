@@ -18,4 +18,6 @@ public abstract class BaseTask
     public abstract List<String> getAndroidDevices();
 
     public abstract void excute() throws Exception;
+
+
 }

@@ -1,7 +1,11 @@
 package com.auto.web.task;
 
+import com.auto.task.BaseTask;
+import com.auto.task.NewsTask;
+import com.auto.web.service.UniqueReadService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
 
 /**
  * 包: com.auto.web.task
@@ -12,8 +16,29 @@ import org.springframework.stereotype.Component;
 @Component("task")
 public class TaskManager
 {
-    @Scheduled(cron = "0 0/1 * * * *")
-    public void runTask(){
-        System.out.println("====================");
+
+    @Scheduled(cron = "0 10 14 * * *")
+    public void runNewsTask(){
+        BaseTask task=null;
+        try
+        {
+            task = new NewsTask();
+            task.excute();
+        }catch (Exception e){
+            try
+            {
+                Thread.sleep(10000);
+            }
+            catch (InterruptedException e1)
+            {
+                e1.printStackTrace();
+            }
+            runNewsTask();
+        }
+
+    }
+    @Scheduled(cron = "0 14 14 * * *")
+    public void runTaoNewsTask(){
+
     }
 }

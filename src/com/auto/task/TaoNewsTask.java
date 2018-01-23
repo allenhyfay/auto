@@ -47,7 +47,8 @@ public class TaoNewsTask extends BaseTask
         if (androidDriverStatus == null) {
             return;
         }
-        TaoNewsScript taoNewsScript = new TaoNewsScript(androidDriverStatus.getAndroidDriver());
+        TaoNewsScript taoNewsScript = new TaoNewsScript(androidDriverStatus.getAndroidDriver()
+                ,androidDriverStatus.getDeviceName());
 
         try {
 

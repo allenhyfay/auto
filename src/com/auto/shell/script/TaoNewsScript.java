@@ -13,9 +13,11 @@ import org.openqa.selenium.WebElement;
 public class TaoNewsScript extends BaseScript
 {
 
-    public TaoNewsScript(AndroidDriver driver)
+    public TaoNewsScript(AndroidDriver driver,String devices)
     {
+        super();
         this.driver=driver;
+        this.devices=devices;
     }
 
     @Override
@@ -43,9 +45,14 @@ public class TaoNewsScript extends BaseScript
                     continue;
                 }
 
-                currentElement.click();
+                String title=currentElement.findElement(By.id("com.coohua.xinwenzhuan:id/tab_feed__item_img_multi_title")).getText();
+                if(!isEmpty(title))
+                {
+                    add(title);
+                    currentElement.click();
 
-                rollPageInCurrent();
+                    rollPageInCurrent();
+                }
 
                 rollUp(600, 100);
                 Thread.currentThread().sleep(6000);
@@ -95,5 +102,11 @@ public class TaoNewsScript extends BaseScript
         rollUp(600, 100);
         driver.findElementById("com.coohua.xinwenzhuan:id/xlxl_actionbar_up").click();
 
+    }
+
+    @Override
+    public String getCurrenTitle()
+    {
+        return null;
     }
 }
