@@ -28,17 +28,17 @@
     <!--===================================================================== -->
     <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
     <!--</bean>-->
-    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    <!--<bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <description>可以引用CLASSPATH中crawl-local.properties中定义的变量</description>
             <list>
-                <value>classpath:resource/crawl-local.properties</value>
+                <value>classpath:/resource/crawl-local.properties</value>
             </list>
         </property>
     </bean>
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="properties" ref="configProperties"/>
-    </bean>
+    </bean>-->
     <!--===================================================================== -->
     <!-- 数据源定义，具体具体情况选择是否多数据源 -->
     <!--===================================================================== -->
@@ -56,9 +56,10 @@
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/auto?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;rewriteBatchedStatements=TRUE&amp;serverTimezone=GMT%2B8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
 
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="1"/>
