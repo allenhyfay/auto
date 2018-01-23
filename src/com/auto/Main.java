@@ -3,6 +3,7 @@ package com.auto;
 import com.auto.task.BaseTask;
 import com.auto.task.NewsTask;
 import com.auto.task.TaoNewsTask;
+import com.auto.task.XingLangNews;
 
 /**
  * 包: com.auto
@@ -17,7 +18,7 @@ public class Main
         BaseTask task=null;
         try
         {
-            task = new NewsTask();
+            task = new XingLangNews();
             task.excute();
         }catch (Exception e){
             try

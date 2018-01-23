@@ -39,7 +39,7 @@ public class TaskManager
 
     }
 
-    @Scheduled(cron = "0 20 14 * * *")
+    @Scheduled(cron = "0 37 15 * * *")
     public void runTaoNewsTask(){
         BaseTask task=null;
         try

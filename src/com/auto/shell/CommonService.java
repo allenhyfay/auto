@@ -204,7 +204,7 @@ public class CommonService
         try {
             AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:" + port + "/wd/hub"),
                     capability);
-            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
             return driver;
         } catch (MalformedURLException e) {
             System.out.println("XXXX: erorr initAppium" + e.toString());
