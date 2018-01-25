@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * 包: com.allen.linux.script
@@ -77,32 +78,15 @@ public class NewsScript extends BaseScript
     {
         long startTime=System.currentTimeMillis();
         boolean isOpen=false;
-       /* Random rand = new Random();
-        long waitTime=rand.nextInt(20000)+30000;
-        System.out.println("当前文章阅读时间："+waitTime);*/
+        Random rand = new Random();
+
         int rollcount=0;
-        while (true){
-
-            Thread.currentThread().sleep(2000);
-           /* rollcount++;
-            try
-            {
-                if (!isOpen&&rollcount>5)
-                {
-
-                    WebElement webElement= driver.findElementByAccessibilityId("展开全文");
-                   *//* String content=webElement.getCssValue("content-desc");
-                    System.out.println(content);*//*
-                    if(webElement.isDisplayed())
-                    {
-                        webElement.click();
-                        isOpen = true;
-                    }
-                }
-            }catch (Exception e){e.printStackTrace();}*/
-            driver.swipe(100,600,100,200,1000);
+        while (true&&rollcount<30){
+            rollcount++;
+            Thread.currentThread().sleep(8000);
+            rollUp(600,300);
             long endTime=System.currentTimeMillis();
-            if(endTime-startTime > 30000)
+            if(endTime-startTime > 100000)
                 break;
         }
         driver.findElementByClassName("android.widget.ImageButton").click();

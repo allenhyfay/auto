@@ -17,7 +17,7 @@ public class XingLangScript extends BaseScript
 
     public XingLangScript(AndroidDriver driver,String devices)
     {
-        //super();
+        super();
         this.driver=driver;
         this.devices=devices;
     }
@@ -50,16 +50,13 @@ public class XingLangScript extends BaseScript
 
                 WebElement titleElement=firstElement.findElement(By.id("com.sohu.infonews:id/article_title"));
                 System.out.println("title:"+titleElement.getText());
-                //if(isEmpty(titleElement.getText())){
-                    //add(titleElement.getText());
+                if(isEmpty(titleElement.getText())){
+                    add(titleElement.getText());
                 titleElement.click();
                     rollPageInCurrent();
-               // }
-                int elementHeight=firstElement.getSize().getHeight();
-                int height=600-elementHeight > 0?600-elementHeight:400;
-
-                rollUp(600,height);
-                Thread.sleep(1000);
+                }
+                rollUp(600,200);
+                Thread.sleep(5000);
             }
 
         }catch (Exception e){e.printStackTrace();}
@@ -70,22 +67,16 @@ public class XingLangScript extends BaseScript
     {
         System.out.printf("-----------------------------------------");
         int count=0;
-        while (true&&count<20){
+        while (true&&count<30){
 
             try
             {
-             /*   WebElement webElement = driver
-                        .findElementById("com.sohu.infonews:id/body_bar");*/
-
-                /*WebElement tipElement = driver
-                        .findElementById("com.sohu.infonews:id/refer_tip");
-                if (tipElement.isDisplayed())
-                {
-                    rollUp(600, 200);
-                    break;
-                }*/
+                 String text=driver.getPageSource();
+                 if(text.contains("热门评论")){
+                     count=30;
+                 }
             }catch (Exception e){e.printStackTrace();}
-            Thread.sleep(1000);
+            Thread.sleep(6000);
             rollUp(600,200);
             count++;
         }

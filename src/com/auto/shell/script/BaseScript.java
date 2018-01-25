@@ -37,7 +37,7 @@ public abstract class BaseScript
 
     public BaseScript()
     {
-        //this.uniqueReadService = SpringContextHolder.getBean("uniqueReadService");
+        this.uniqueReadService = SpringContextHolder.getBean("uniqueReadService");
     }
 
     protected boolean isEmpty(String title){
