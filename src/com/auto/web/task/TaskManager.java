@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class TaskManager
 {
 
-    @Scheduled(cron = "0 04 15 * * *")
+    //@Scheduled(cron = "0 01 13 * * *")
     public void runNewsTask(){
         BaseTask task=null;
         try
@@ -60,7 +60,7 @@ public class TaskManager
         }
     }
 
-    //@Scheduled(cron = "0 52 12 * * *")
+    @Scheduled(cron = "0 02 18 * * *")
     public void runXLNewsTask(){
         BaseTask task=null;
         try

@@ -38,7 +38,7 @@ public class XingLangNews extends BaseTask
     @Override
     public List<String> getAndroidDevices()
     {
-        return Arrays.asList(new String[]{"HKR4C15817004771"});
+        return Arrays.asList(new String[]{"192.168.1.121:5555"});
     }
 
     @Override
